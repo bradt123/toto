@@ -3,7 +3,7 @@
 <?php 
 class Database extends PDO
 {
-	private $dbname = "crud"
+	private $dbname = "test"
 	private $host = "localhost";
 	private $user = "postgres";
 	private $pass = "brey";

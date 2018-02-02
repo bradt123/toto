@@ -27,7 +27,7 @@ public function __construct(Database $db){
 public function save()
 {
 	try{
-		$query = $this->con->prepare('INSERT INTO user ('username', password) values (?,?)');
+		$query = $this->con->prepare('INSERT INTO users ('username', password) values (?,?)');
 		$query->bindParam(1,$this->username,PDO::PARAM_STR);
 		$query->bindParam(2, $this->password,PDO::PARAM_STR);
 		$query->execute();
@@ -46,15 +46,15 @@ public function get()
                 $query = $this->con->prepare('SELECT * FROM users WHERE id = ?');
                 $query->bindParam(1, $this->id, PDO::PARAM_INT);
                 $query->execute();
-     $this->con->close();
-     return $query->fetch(PDO::FETCH_OBJ);
+     			$this->con->close();
+     			return $query->fetch(PDO::FETCH_OBJ);
             }
             else
             {
                 $query = $this->con->prepare('SELECT * FROM users');
-     $query->execute();
-     $this->con->close();
-     return $query->fetchAll(PDO::FETCH_OBJ);
+     			$query->execute();
+     			$this->con->close();
+    			return $query->fetchAll(PDO::FETCH_OBJ);
             }
  }
         catch(PDOException $e)
@@ -62,6 +62,32 @@ public function get()
          echo  $e->getMessage();
      }
  }
+ public function delete()
+ {
+ 	try{
+ 		$query = $this->con->prepare('DELETE FROM users WHERE id = ?');
+ 		$query->bindParam(1, $this->id, PDO::PARAM_INT);
+ 		$query->execute();
+ 		$this->con->close();
+ 		return true;
+ 	}
+ 	catch(PDOException $e)
+ 	{
+ 		echo $e->getMessage();
+ 	}
+ }
+ 
+ public function baseurl()
+ {
+ 	return stripos($_SERVER['SERVER_PROTOCOL'], 'https') == true ? 'https://' : 'http://' . $_SERVER['HTTP_HOST']. "/";
+ }
+ public function checkUser($user)
+    {
+        if( ! $user )
+        {
+            header("Location:" . User::baseurl() . "app/list.php");
+        }
+    }
 
 }
 
