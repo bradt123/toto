@@ -1,23 +1,4 @@
-<!-- DROP TABLE IF EXISTS "user";
-CREATE TABLE "user" (
-"id" int  NOT NULL,
-"username" varchar(100) COLLATE "default",
-"password" varchar(100) COLLATE "default",
-"created_at" date DEFAULT ('now'::text)::date NOT NULL
-)
-WITH (OIDS=FALSE)
- 
-;
- 
- Records of users
 
-BEGIN;
-INSERT INTO "user" VALUES ('10', 'iparra', '123456', '2015-10-03');
-COMMIT;
- 
-  Primary Key structure for table users
-
-ALTER TABLE "user" ADD PRIMARY KEY ("id"); -->
 
 <?php 
 class Database extends PDO
